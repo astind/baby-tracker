@@ -1,3 +1,4 @@
+import LogView from "@/views/LogView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
@@ -17,6 +18,11 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
     },
+    {
+      path: "/log",
+      name: "log",
+      component: LogView,
+    }
   ],
 });
 
