@@ -13,7 +13,7 @@ import { RouterLink, RouterView } from "vue-router";
         </nav>
       </div>
     </header>
-    <div class="max-w-xl mx-auto">
+    <div class="max-w-6xl mx-auto">
       <RouterView />
     </div>
   </div>
