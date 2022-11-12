@@ -4,9 +4,8 @@ import { ref } from "vue";
 
 export interface InputObject {
   label: string;
-  inputType: string;
+  inputType: "number" | "text" | "select";
   options?: string[];
-  select?: string[];
 }
 
 export interface OutputObject {
@@ -37,6 +36,7 @@ function logData() {
     value: val.value,
   };
   if (selectedOption.value) {
+    console.log('here')
     output.option = selectedOption.value;
   }
   emit("log", output);
@@ -56,7 +56,12 @@ function logData() {
       <label class="label">
         <span class="label-text">{{ input.label }}</span>
       </label>
-      <label class="input-group">
+      <select v-if="input.inputType === 'select'" name="val-select" id="val-select" class="select select-bordered" v-model="val">
+        <option v-for="option of input.options" :key="option" :value="option">
+          {{ option }}
+        </option>
+      </select>
+      <label v-else class="input-group">
         <input class="input input-bordered w-full max-w-xs" :type="input.inputType" :name="input.label"
           :id="input.label" v-model="val" />
         <select v-if="input.options" name="options" id="options" class="select select-bordered" v-model="selectedOption">

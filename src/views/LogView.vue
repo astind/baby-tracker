@@ -10,6 +10,11 @@ const foodLog: InputObject = {
   options: ["oz", "mL"],
   inputType: "number",
 };
+const diaperLog: InputObject = {
+  label: "Contents",
+  inputType: "select",
+  options: ["Pee", "Poo", "Pee + Poo"]
+}
 
 function changeTab(index: number) {
   tabSelected.value = index;
@@ -35,7 +40,9 @@ function getLog(event: any) {
     <div :class="tabSelected === 0 ? 'block' : 'hidden'">
       <InputLog :input="foodLog" @log="getLog"></InputLog>
     </div>
-    <div :class="tabSelected === 1 ? 'block' : 'hidden'">Diaper Content</div>
+    <div :class="tabSelected === 1 ? 'block' : 'hidden'">
+      <InputLog :input="diaperLog" @log="getLog"></InputLog>
+    </div>
     <div :class="tabSelected === 2 ? 'block' : 'hidden'">Naps Content</div>
   </div>
 </template>
