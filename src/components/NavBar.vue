@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+
+function closeDropdown() {
+  document.activeElement.blur();
+}
 </script>
 
 <template>
@@ -12,9 +16,9 @@ import { RouterLink } from "vue-router";
           </svg>
         </label>
         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52">
-          <li><RouterLink to="/">Home</RouterLink></li>
-          <li><RouterLink to="/about">About</RouterLink></li>
-          <li><RouterLink to="/log">Log</RouterLink></li>
+          <li><RouterLink to="/" @click="closeDropdown()">Home</RouterLink></li>
+          <li><RouterLink to="/about" @click="closeDropdown()">About</RouterLink></li>
+          <li><RouterLink to="/log" @click="closeDropdown()">Log</RouterLink></li>
         </ul>
       </div>
     </div>
