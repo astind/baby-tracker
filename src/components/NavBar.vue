@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 
-function closeDropdown() {
-  document.activeElement.blur();
+const menuNav = [
+  { route: "/", name: "Home", id: "menu-nav-home" },
+  { route: "/about", name: "About", id: "menu-nav-about" },
+  { route: "/log", name: "Log", id: "menu-nav-log" },
+];
+
+function closeDropdown(id: string) {
+  document.getElementById(id)?.blur();
 }
 </script>
 
@@ -16,9 +22,11 @@ function closeDropdown() {
           </svg>
         </label>
         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52">
-          <li><RouterLink to="/" @click="closeDropdown()">Home</RouterLink></li>
-          <li><RouterLink to="/about" @click="closeDropdown()">About</RouterLink></li>
-          <li><RouterLink to="/log" @click="closeDropdown()">Log</RouterLink></li>
+          <li v-for="nav in menuNav" :key="nav.id">
+            <RouterLink :id="nav.id" :to="nav.route" @click="closeDropdown(nav.id)">
+              {{ nav.name }}
+            </RouterLink>
+          </li>
         </ul>
       </div>
     </div>
