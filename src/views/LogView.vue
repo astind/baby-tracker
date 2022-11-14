@@ -13,8 +13,8 @@ const foodLog: InputObject = {
 const diaperLog: InputObject = {
   label: "Contents",
   inputType: "select",
-  options: ["Pee", "Poo", "Pee + Poo"]
-}
+  options: ["Pee", "Poo", "Pee + Poo"],
+};
 
 function changeTab(index: number) {
   tabSelected.value = index;
@@ -22,7 +22,7 @@ function changeTab(index: number) {
 
 function getLog(event: any) {
   console.log(event);
-} 
+}
 </script>
 
 <template>
