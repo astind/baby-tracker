@@ -7,6 +7,7 @@ const menuNav = [
   { route: "/log", name: "Log", id: "menu-nav-log" },
 ];
 
+// workaround function to get the daisyui dropdown menu to close on click
 function closeDropdown(id: string) {
   document.getElementById(id)?.blur();
 }
