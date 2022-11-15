@@ -1,11 +1,8 @@
-
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useUserStore = defineStore("user", {
-  state: () => ({
-    loggedIn: false
-  }),
-  actions: {
-    
-  }
+export const useUserStore = defineStore("user", () => {
+  const loggedIn = ref(false);
+
+  return { loggedIn };
 });

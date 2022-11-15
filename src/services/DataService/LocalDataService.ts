@@ -1,13 +1,18 @@
-import type { FoodData, SaveService } from "./SaveServiceInterface";
+import type {
+  FoodData,
+  DataService,
+  DiaperData,
+  NapData,
+} from "./DataServiceInterface";
 
 interface LocalBabyData {
   baby?: any;
-  feeds?: any[];
-  diapers?: any[];
-  naps?: any[];
+  feeds: FoodData[];
+  diapers: DiaperData[];
+  naps: NapData[];
 }
 
-export class LocalSaveService implements SaveService {
+export class LocalDataService implements DataService {
   readonly KEY: string = "baby-tracker-data";
 
   private fetchLocalData(): LocalBabyData | null {
@@ -23,6 +28,16 @@ export class LocalSaveService implements SaveService {
     localStorage.setItem(this.KEY, JSON.stringify(data));
   }
 
+  public getAllData = (
+    babyID: string
+  ): (FoodData | DiaperData | NapData)[] | undefined => {
+    console.log(`fetching data for ${babyID} from local storage`);
+    const data = this.fetchLocalData();
+    if (data) {
+      return [...data.feeds, ...data.diapers, ...data.naps ];
+    }
+  };
+
   public LogFeeding = (foodData: FoodData): boolean => {
     let data = this.fetchLocalData();
     if (data) {
@@ -34,9 +49,17 @@ export class LocalSaveService implements SaveService {
     } else {
       data = {
         feeds: [foodData],
+        diapers: [],
+        naps: [],
       };
     }
     this.storeLocalData(data);
+    console.log("Logged Feeding");
     return true;
   };
+
+  public clearData() {
+    localStorage.removeItem(this.KEY);
+    return true;
+  }
 }

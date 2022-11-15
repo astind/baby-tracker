@@ -3,8 +3,8 @@ import { RouterLink } from "vue-router";
 
 const menuNav = [
   { route: "/", name: "Home", id: "menu-nav-home" },
-  { route: "/about", name: "About", id: "menu-nav-about" },
   { route: "/log", name: "Log", id: "menu-nav-log" },
+  { route: "/history", name: "History", id: "menu-nav-history" },
 ];
 
 // workaround function to get the daisyui dropdown menu to close on click

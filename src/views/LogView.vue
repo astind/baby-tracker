@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import InputLog from "../components/InputLog.vue";
+import InputLog, { type OutputObject } from "../components/InputLog.vue";
 import type { InputObject } from "../components/InputLog.vue";
+import { useDataStore } from "@/stores/data";
 
 let tabSelected = ref(0);
 const tabs = ref(["Food", "Diapers", "Naps"]);
@@ -15,13 +16,20 @@ const diaperLog: InputObject = {
   inputType: "select",
   options: ["Pee", "Poo", "Pee + Poo"],
 };
+const dataStore = useDataStore();
 
 function changeTab(index: number) {
   tabSelected.value = index;
 }
 
-function getLog(event: any) {
+function getLog(event: OutputObject) {
   console.log(event);
+  dataStore.logFeeding({
+    date: event.date,
+    amount: parseInt(event.value),
+    unit: event.option as "mL" | "oz",
+    babyId: "test",
+  });
 }
 </script>
 

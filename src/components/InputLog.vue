@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, type PropType } from "vue";
 import { ref } from "vue";
+import dayjs from "dayjs";
 
 export interface InputObject {
   label: string;
@@ -22,7 +23,7 @@ const emit = defineEmits(["log"]);
 
 let val = ref("");
 let selectedOption = ref("");
-let date = ref(new Date().toISOString().split(".")[0]);
+let date = ref(dayjs().format("YYYY-MM-DDTHH:mm"));
 
 onMounted(() => {
   if (props.input.options) {
@@ -36,12 +37,10 @@ function logData() {
     value: val.value,
   };
   if (selectedOption.value) {
-    console.log('here')
     output.option = selectedOption.value;
   }
   emit("log", output);
 }
-
 </script>
 
 <template>
